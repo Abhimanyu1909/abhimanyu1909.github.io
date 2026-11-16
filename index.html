@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio of Abhimanyu Prajapati, Frontend Developer. React, Node.js, HTML5, CSS3, JavaScript.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Abhimanyu Prajapati</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 1120px column; split hero (intro + live JSX "props" card), JD-fit matrix, filterable project grid, compact CV rail. Facet motif = clipped corner on key surfaces. */
+:root{
+  --bg:#f4f6f9; --surface:#ffffff; --ink:#131722; --muted:#566074; --line:#dde2ea;
+  --accent:#1d4ed8; --accent-soft:#e3eafc; --gold:#a8730f; --code-bg:#0f1624; --code-fg:#d6deeb;
+  --tok-k:#c792ea; --tok-s:#addb67; --tok-p:#7fdbca; --tok-c:#637777;
+  --f-display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --cut:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1018; --surface:#141a25; --ink:#e8ecf3; --muted:#9aa5b8; --line:#253043;
+  --accent:#7aa2ff; --accent-soft:#1a2747; --gold:#e0b25a; --code-bg:#080c14; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1018; --surface:#141a25; --ink:#e8ecf3; --muted:#9aa5b8; --line:#253043;
+  --accent:#7aa2ff; --accent-soft:#1a2747; --gold:#e0b25a; --code-bg:#080c14; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+.mono{font-family:var(--f-mono)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.mark{font-family:var(--f-display);font-weight:800;font-size:18px;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.mark span{color:var(--accent)}
+.navlinks{display:flex;gap:20px;font-size:14px}
+.navlinks a{color:var(--muted);text-decoration:none}
+.navlinks a:hover{color:var(--ink)}
+.vp{font-family:var(--f-mono);font-size:11px;color:var(--muted);border:1px solid var(--line);padding:3px 8px;border-radius:999px;white-space:nowrap}
+@media (max-width:720px){.navlinks{display:none}}
+
+/* hero */
+.hero{padding-block:64px 56px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero>*{min-width:0}
+.avail{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:20px}
+.dot{width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 4px color-mix(in srgb,#16a34a 20%,transparent)}
+.hero h1{font-size:clamp(40px,6vw,68px);font-weight:800;letter-spacing:-.035em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:18px;color:var(--muted);max-width:52ch;margin:20px 0 28px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{font:600 15px var(--f-body);padding:12px 20px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0c1018}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0c1018}}
+.email{font-family:var(--f-mono);font-size:13px;color:var(--muted);user-select:all}
+
+.code{background:var(--code-bg);color:var(--code-fg);font:13.5px/1.75 var(--f-mono);padding:22px 24px;overflow-x:auto;
+  clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px));box-shadow:0 20px 50px -25px rgba(10,20,40,.45)}
+.code .bar{display:flex;justify-content:space-between;color:var(--tok-c);font-size:11px;margin-bottom:12px;letter-spacing:.06em}
+.code pre{margin:0;white-space:pre}
+.k{color:var(--tok-k)}.s{color:var(--tok-s)}.p{color:var(--tok-p)}.c{color:var(--tok-c)}
+.cursor{display:inline-block;width:8px;height:16px;background:var(--tok-p);vertical-align:-3px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (max-width:860px){.hero{grid-template-columns:1fr;padding-block:40px}}
+
+/* stats strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line)}
+.stat{padding:20px 16px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat b{display:block;font-family:var(--f-display);font-size:28px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+@media (max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
+
+section{padding-block:72px 8px}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.sh h2{font-size:clamp(28px,3.6vw,38px);font-weight:800;letter-spacing:-.025em;margin-top:6px}
+.sh p{color:var(--muted);max-width:46ch;margin:0}
+
+/* fit matrix */
+.fit{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.fit div{background:var(--surface);padding:20px 22px;min-width:0}
+.fit .req{font-family:var(--f-mono);font-size:12px;color:var(--accent);margin-bottom:6px}
+.fit p{margin:0;font-size:15px}
+@media (max-width:720px){.fit{grid-template-columns:1fr}}
+
+/* projects */
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:500 13px var(--f-body);padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card.feature{grid-column:span 3;display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:28px;
+  clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,0 100%)}
+.card.feature>*{min-width:0}
+.card .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.card h3{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.card.feature h3{font-size:26px}
+.tag{font-family:var(--f-mono);font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card ul{margin:0;padding-left:18px;font-size:14.5px;color:var(--muted);display:grid;gap:6px}
+.card ul b{color:var(--ink);font-weight:600}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.stack span{font-family:var(--f-mono);font-size:11.5px;padding:3px 8px;background:var(--accent-soft);color:var(--ink)}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-content:start}
+.metrics div{border-top:2px solid var(--accent);padding-top:10px}
+.metrics b{font-family:var(--f-display);font-size:30px;font-weight:800;display:block;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.metrics span{font-size:12.5px;color:var(--muted)}
+.repo{font-size:13px;font-weight:600}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.card.feature{grid-column:span 2;grid-template-columns:1fr}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}.card.feature{grid-column:span 1}}
+
+/* cv */
+.cv{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.cv>*{min-width:0}
+.cv h3{font-size:14px;font-family:var(--f-mono);font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+.item{padding:16px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:4px 16px}
+.item strong{font-weight:600}
+.item .when{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
+.item .sub{grid-column:1/-1;color:var(--muted);font-size:14.5px}
+.item ul{grid-column:1/-1;margin:6px 0 0;padding-left:18px;font-size:14.5px;color:var(--muted)}
+@media (max-width:760px){.cv{grid-template-columns:1fr}}
+
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.skills div{min-width:0}
+.skills h4{margin:0 0 10px;font:600 14px var(--f-body)}
+.skills .stack span{background:transparent;border:1px solid var(--line)}
+.skills .lead span{background:var(--accent);color:#fff;border-color:var(--accent)}
+:root[data-theme="dark"] .skills .lead span{color:#0c1018}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .skills .lead span{color:#0c1018}}
+@media (max-width:760px){.skills{grid-template-columns:1fr}}
+
+footer{margin-top:80px;border-top:1px solid var(--line);padding-block:48px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:end}
+footer h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.03em}
+.contact{display:grid;gap:6px;font-size:15px}
+.contact .mono{font-size:14px;user-select:all}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;font-size:14px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="mark" href="#top">AP<span>.</span></a>
+    <div class="navlinks"><a href="#fit">Fit</a><a href="#work">Work</a><a href="#cv">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div>
+    <span class="vp" id="vp" aria-live="off">viewport —</span>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <div>
+      <div class="avail"><span class="dot"></span>Open to full-time roles · Available June 2027 · Bengaluru OK</div>
+      <h1>Abhimanyu Prajapati<br><em>Frontend Developer</em></h1>
+      <p class="lede">M.Tech CSE student at IIT Hyderabad who builds full web products end to end: React interfaces, Node and Django backends, payment flows and real-time features. I care about interfaces that are fast, secure and pleasant to use.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#work">See my work</a>
+        <button class="btn" id="copyEmail" type="button">Copy email</button>
+        <span class="email">cs25mtech14022@iith.ac.in</span>
+      </div>
+      <div class="ctas" id="extLinks" style="margin-top:14px"></div>
+    </div>
+    <div class="code" aria-label="Profile summary written as a React component">
+      <div class="bar"><span>Candidate.jsx</span><span>React</span></div>
+<pre><span class="k">export default function</span> <span class="p">Candidate</span>() {
+  <span class="k">return</span> (
+    &lt;<span class="p">Developer</span>
+      name=<span class="s">"Abhimanyu Prajapati"</span>
+      role=<span class="s">"Frontend Developer"</span>
+      stack={[<span class="s">"HTML5"</span>, <span class="s">"CSS3"</span>, <span class="s">"JavaScript"</span>,
+              <span class="s">"React"</span>, <span class="s">"Node.js"</span>, <span class="s">"Tailwind"</span>]}
+      shipped={<span class="s">"heyChat · 34 REST endpoints"</span>}
+      leetcode={<span class="s">"Knight · 2077 · top 1.76%"</span>}
+      school=<span class="s">"IIT Hyderabad, M.Tech '27"</span>
+    /&gt;
+  );
+} <span class="c">// ready for BlueStone</span><span class="cursor"></span></pre>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><b>2077</b><span>LeetCode rating · Knight</span></div>
+    <div class="stat"><b>~2.2%</b><span>Amazon ML Summer School 2026 selection</span></div>
+    <div class="stat"><b>9.04</b><span>B.Tech CGPA, CSJM University</span></div>
+    <div class="stat"><b>15+</b><span>Projects shipped with code</span></div>
+  </div>
+
+  <section id="fit">
+    <div class="sh">
+      <div><div class="eyebrow">For the Frontend Developer role</div><h2>Where my work meets the brief</h2></div>
+      <p>Each line of the job description, matched with something I have already built.</p>
+    </div>
+    <div class="fit">
+      <div><div class="req">React.js · component-driven UI</div><p>Built heyChat's React + Tailwind interface: live messaging, typing indicators, read receipts, polls and expiring stories.</p></div>
+      <div><div class="req">Node.js · backend API integration</div><p>Wired that UI to my own Node/Express API: 34 REST endpoints over 16 PostgreSQL models, plus Socket.io for real-time events.</p></div>
+      <div><div class="req">E-commerce experience</div><p>At RDSO I built an e-commerce platform from scratch: product, cart, checkout and auth, with a PayTm gateway and signed transaction checks.</p></div>
+      <div><div class="req">Quality · code review · testing</div><p>Pytest and GitHub Actions CI on my FastAPI service; found and fixed 4 critical bugs in a published research baseline.</p></div>
+      <div><div class="req">Secure, reliable web code</div><p>TransactWar: hardened CSP headers, CSRF protection and rate limiting, written without frameworks and defended live against 4 teams.</p></div>
+      <div><div class="req">Problem solving · attention to detail</div><p>LeetCode Knight, rated 2077, top 1.76% of 889K+ users, best weekly contest rank 202.</p></div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="sh">
+      <div><div class="eyebrow">Selected work</div><h2>Projects</h2></div>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-f="web" aria-pressed="false">Web &amp; UI</button>
+        <button class="chip" type="button" data-f="ai" aria-pressed="false">AI / ML</button>
+        <button class="chip" type="button" data-f="sys" aria-pressed="false">Systems &amp; Cloud</button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="cv">
+    <div class="cv">
+      <div>
+        <h3>Experience</h3>
+        <div class="item">
+          <strong>Software Development Intern</strong><span class="when">May–Jul 2024</span>
+          <span class="sub">Research Designs &amp; Standards Organisation (RDSO), Ministry of Railways</span>
+          <ul>
+            <li>Built a Django e-commerce platform from scratch: 4 relational models, 12 REST-style routes across product, cart, checkout and auth.</li>
+            <li>Implemented a 3-stage auth flow: email-activated signup, login/logout and token-based password reset.</li>
+            <li>Integrated PayTm with checksum signature verification for tamper-proof payment confirmation.</li>
+          </ul>
+        </div>
+        <div class="item">
+          <strong>Master's thesis · RadXAI</strong><span class="when">2026</span>
+          <span class="sub">Poster accepted at WiML @ NeurIPS 2026 · paper submitted to AAAI 2027</span>
+          <ul><li>Visual RAG pipeline that cut hallucination in radiology vision-language models from 45.1% to 15.6%.</li></ul>
+        </div>
+        <div class="item">
+          <strong>Organizer · Techno Talks</strong><span class="when">CSJMU Kanpur</span>
+          <span class="sub">Ran speaker logistics and execution for a 100+ student startup-industry event.</span>
+        </div>
+      </div>
+      <div>
+        <h3>Education</h3>
+        <div class="item"><strong>M.Tech, Computer Science &amp; Engineering (NIS)</strong><span class="when">2027</span><span class="sub">IIT Hyderabad · CGPA 7.65</span></div>
+        <div class="item"><strong>B.S. Data Science &amp; Applications</strong><span class="when">2022–now</span><span class="sub">IIT Madras · Advanced certificates in ML &amp; Data Science and in Programming &amp; App Development</span></div>
+        <div class="item"><strong>B.Tech, Computer Science &amp; Engineering</strong><span class="when">2025</span><span class="sub">Chhatrapati Shahu Ji Maharaj University · CGPA 9.04</span></div>
+        <div class="item"><strong>Class XII · Class X</strong><span class="when">2020 · 2018</span><span class="sub">Sri Chaitanya Junior College (8.63) · Kendriya Vidyalaya (71.2%)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sh"><div><div class="eyebrow">Toolkit</div><h2>Skills</h2></div></div>
+    <div class="skills">
+      <div><h4>Frontend</h4><div class="stack lead"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React.js</span><span>TailwindCSS</span><span>Responsive design</span><span>Streamlit</span></div></div>
+      <div><h4>Backend &amp; APIs</h4><div class="stack"><span>Node.js</span><span>Express</span><span>Socket.io</span><span>REST APIs</span><span>Django</span><span>FastAPI</span><span>PostgreSQL</span><span>MySQL</span><span>PHP</span></div></div>
+      <div><h4>Engineering practice</h4><div class="stack"><span>Git / GitHub</span><span>Docker</span><span>GitHub Actions</span><span>Pytest</span><span>Linux / Bash</span><span>Cursor</span><span>Claude Code</span><span>Copilot</span></div></div>
+      <div><h4>Languages</h4><div class="stack"><span>JavaScript</span><span>Python</span><span>C++</span><span>C</span><span>SQL</span></div></div>
+      <div><h4>AI / ML</h4><div class="stack"><span>PyTorch</span><span>LangChain</span><span>RAG</span><span>LoRA</span><span>FAISS</span><span>Hugging Face</span><span>scikit-learn</span></div></div>
+      <div><h4>Cloud &amp; systems</h4><div class="stack"><span>AWS EKS</span><span>Kafka</span><span>Spark</span><span>Terraform</span><span>Redis</span><span>POSIX sockets</span></div></div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div><div class="eyebrow">Contact</div><h2>Let's build something<br>people enjoy using.</h2></div>
+    <div class="contact">
+      <span class="mono">cs25mtech14022@iith.ac.in</span>
+      <span class="mono">+91 92190 22638</span>
+      <span style="display:flex;gap:16px;font-size:15px"><a href="https://github.com/abhimanyu1909" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/abhimanyu-prajapati-" target="_blank" rel="noopener">LinkedIn ↗</a></span>
+      <span style="color:var(--muted);font-size:14px">IIT Hyderabad, Sangareddy, Telangana</span>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+// Add your profile URLs here; empty ones are hidden.
+const LINKS = { github: "https://github.com/abhimanyu1909", linkedin: "https://www.linkedin.com/in/abhimanyu-prajapati-", resume: "" };
+
+const PROJECTS = [
+  {f:"web",feature:true,name:"heyChat",tag:"Real-time web app",
+   desc:"A full-stack encrypted chat app with a React + Tailwind front end and my own Node/Express API.",
+   points:["<b>Live UI:</b> messaging, typing indicators and read receipts over Socket.io","<b>End-to-end encryption</b> (Curve25519 / XSalsa20 / Poly1305) with password-based key wrapping and escrow recovery","Voice notes, Cloudinary file sharing, live polls and 24-hour stories"],
+   metrics:[["34","REST endpoints"],["16","relational models"],["E2E","encrypted"]],
+   stack:["React","Node.js","Express","PostgreSQL","Socket.io","TailwindCSS"]},
+  {f:"web",name:"E-commerce Platform",tag:"Internship · RDSO",
+   desc:"Product, cart, checkout and auth modules with 12 REST-style routes, email-activated signup and PayTm payments with checksum verification.",
+   stack:["Django","Python","PayTm","REST"]},
+  {f:"web",name:"TransactWar",tag:"Secure web app",
+   desc:"Built without security frameworks: CSRF protection, hardened CSP, secure sessions, rate limiting and parameterized queries. Defended live in a War Game against 4 teams.",
+   stack:["PHP","MySQL","Docker Compose"]},
+  {f:"web",name:"Multi-Agent Research System",tag:"Live dashboard UI",
+   desc:"Four LangChain agents (Search, Reader, Writer, Critic) behind a real-time Streamlit UI with live pipeline visualization, report scoring and Markdown export.",
+   stack:["LangChain","Groq","Tavily","Streamlit"]},
+  {f:"web",name:"Emotion Classifier API",tag:"Model serving",
+   desc:"Bidirectional GRU at 92.1% accuracy, served via FastAPI with Pydantic validation and a web UI, tested with pytest and GitHub Actions CI.",
+   stack:["FastAPI","TensorFlow","Docker","CI"]},
+  {f:"ai",name:"RadXAI",tag:"M.Tech thesis",
+   desc:"Visual RAG for radiology VLMs. Hallucination rate down from 45.1% to 15.6%, precision up from 0.549 to 0.844, with a 13K+ question benchmark.",
+   stack:["LLaVA","Qwen2.5","FAISS","LoRA"]},
+  {f:"ai",name:"FinSight-AI",tag:"RAG evaluation",
+   desc:"RAG over SEC 10-K filings with hybrid BM25 + FAISS search and reranking. 0.831 faithfulness and 0.745 answer relevance on RAGAS.",
+   stack:["LangChain","FAISS","Mistral","RAGAS"]},
+  {f:"ai",name:"AI Video Assistant",tag:"Audio · video · RAG",
+   desc:"Ingests YouTube links or files, transcribes English and Hinglish, summarizes action items and decisions, and lets you chat with the transcript.",
+   stack:["Whisper","Sarvam AI","ChromaDB","Streamlit"]},
+  {f:"ai",name:"CA-FedPHA",tag:"Federated learning",
+   desc:"Extended an ICML 2025 method with SVD ratio selection, conflict-weighted aggregation and a bandit prompt-length adaptor across 10 clients.",
+   stack:["PyTorch","CLIP","LoRA"]},
+  {f:"ai",name:"GAN Fraud Detection",tag:"Unsupervised",
+   desc:"AnoGAN and BiGAN on 284K+ transactions trained with zero fraud labels. 0.958 AUROC, with BiGAN inference 100–200× faster.",
+   stack:["PyTorch","AnoGAN","BiGAN"]},
+  {f:"ai",name:"GNNs from Scratch",tag:"Graph learning",
+   desc:"GCN and GAT built from raw tensor ops alongside a GraphSAGE baseline, reaching 98.25%, 99.25% and 100% test accuracy.",
+   stack:["PyTorch","PyG"]},
+  {f:"ai",name:"Brain Tumor MRI Classifier",tag:"Computer vision",
+   desc:"HOG features, PCA and a tuned RBF SVM on 3,040 MRI scans: 97.2% accuracy and 0.998 ROC-AUC.",
+   stack:["OpenCV","scikit-learn"]},
+  {f:"sys",name:"HTTP Reverse Proxy",tag:"Systems programming",
+   desc:"Multithreaded HTTP/1.1 proxy with a fixed thread pool and a thread-safe LRU cache honoring TTL and cache-control headers.",
+   stack:["C++17","POSIX Sockets","CMake"]},
+  {f:"sys",name:"VacciGuard",tag:"Cloud streaming",
+   desc:"IoT pipeline on AWS EKS. Spike latency cut from 231.78s to 2.10s and failure recovery cut by 76% with Spark checkpointing.",
+   stack:["Kafka","Spark","AWS EKS","Terraform"]},
+  {f:"ai",name:"Spectral Clustering",tag:"Graph analytics",
+   desc:"Community detection on a 600-node graph with eigengap-chosen k=4 and a 12.8× intra- vs inter-cluster edge density ratio.",
+   stack:["NumPy","SciPy","NetworkX"]}
+];
+
+const grid = document.getElementById("grid");
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function card(p){
+  const stack = `<div class="stack">${p.stack.map(s=>`<span>${esc(s)}</span>`).join("")}</div>`;
+  const repo = LINKS.github ? `<a class="repo" href="${esc(LINKS.github)}" target="_blank" rel="noopener">View on GitHub →</a>` : "";
+  if (p.feature) return `<article class="card feature" data-f="${p.f}">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="top"><h3>${esc(p.name)}</h3><span class="tag">${esc(p.tag)}</span></div>
+      <p>${esc(p.desc)}</p><ul>${p.points.map(x=>`<li>${x}</li>`).join("")}</ul>${stack}${repo}</div>
+    <div class="metrics">${p.metrics.map(m=>`<div><b>${m[0]}</b><span>${m[1]}</span></div>`).join("")}</div></article>`;
+  return `<article class="card" data-f="${p.f}">
+    <div class="top"><h3>${esc(p.name)}</h3><span class="tag">${esc(p.tag)}</span></div>
+    <p>${esc(p.desc)}</p>${stack}${repo}</article>`;
+}
+function render(f){
+  grid.innerHTML = PROJECTS.filter(p => f==="all" || p.f===f).map(card).join("");
+}
+render("all");
+document.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x===b ? "true" : "false"));
+  render(b.dataset.f);
+}));
+
+// external links (only those filled in)
+const ext = document.getElementById("extLinks");
+[["github","GitHub"],["linkedin","LinkedIn"],["resume","Résumé"]].forEach(([k,label]) => {
+  if (!LINKS[k]) return;
+  const a = document.createElement("a");
+  a.className = "btn"; a.href = LINKS[k]; a.target = "_blank"; a.rel = "noopener"; a.textContent = label + " ↗";
+  ext.appendChild(a);
+});
+if (!ext.children.length) ext.hidden = true;
+
+// copy email
+const toast = document.getElementById("toast");
+function say(t){ toast.textContent = t; toast.hidden = false; clearTimeout(say.t); say.t = setTimeout(()=>toast.hidden = true, 1800); }
+document.getElementById("copyEmail").addEventListener("click", () => {
+  const email = "cs25mtech14022@iith.ac.in";
+  navigator.clipboard.writeText(email).then(() => say("Email copied"), () => {
+    const el = document.querySelector(".email"); const r = document.createRange(); r.selectNodeContents(el);
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); say("Email selected — press Ctrl+C");
+  });
+});
+
+// live viewport badge: shows the responsive breakpoint in use
+const vp = document.getElementById("vp");
+function bp(){ const w = innerWidth; vp.textContent = `${w}px · ${w<600?"mobile":w<900?"tablet":"desktop"}`; }
+bp(); addEventListener("resize", bp);
+</script>
+</body>
+</html>
